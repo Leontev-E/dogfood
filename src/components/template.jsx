@@ -1,8 +1,6 @@
 import React from "react";
-import './index.css';
+import "./index.css";
 
 export default () => {
-    return (
-        <div className="card"></div>
-    )
+    return <div></div>
 }

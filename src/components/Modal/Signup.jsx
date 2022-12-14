@@ -32,17 +32,17 @@ export default ({change, api, close, setToken}) => {
                     api.signIn(body)
                         .then(res => res.json())
                         .then(data => {
-                            localStorage.setItem('user8', data.data.name);
-                            localStorage.setItem('token8', data.token);
+                            localStorage.setItem("user8", data.data.name);
+                            localStorage.setItem("token8", data.token);
                             setToken(data.token);
                         })
-                    setInp1('');
-                    setInp2('');
-                    setInp3('');
+                    setInp1("");
+                    setInp2("");
+                    setInp3("");
                     close(false);
                 } else {
                     alert(data.message);
-                    // оттобразить уведомление с ошибкой
+                    // Отобразить уведомление с ошибкой
                 }
             })
     }
@@ -71,3 +71,4 @@ export default ({change, api, close, setToken}) => {
         <button className="btn link" type="button" onClick={() => {change(prev => !prev)}}>Войти</button>
     </form>
 }
+

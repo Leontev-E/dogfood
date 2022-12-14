@@ -14,10 +14,12 @@ export default ({isActive, setState, api, setToken}) => {
         <div className="modal">
             <div className="modal-close" onClick={() => setState(false)}/>
             <h2>{auth ? "Войти" : "Зарегистрироваться"}</h2>
-                {auth ? <Login change={setAuth} api={api} close={setState} setToken={setToken}/> 
+            {auth 
+                ? 
+                <Login change={setAuth} api={api} close={setState} setToken={setToken}/> 
                 : 
                 <Signup change={setAuth} api={api} close={setState} setToken={setToken}/>
-                }
+            }
         </div>
     </div>
 }

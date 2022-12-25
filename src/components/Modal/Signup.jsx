@@ -71,3 +71,4 @@ export default ({change, api, close, setToken}) => {
         <button className="btn link" type="button" onClick={() => {change(prev => !prev)}}>Войти</button>
     </form>
 }
+

@@ -96,3 +96,9 @@ const App = () => {
     )
 }
 export default App;
+<<<<<<< HEAD
+=======
+
+
+// Примечание
+>>>>>>> ce62fd1ff6982941d7375304fc8c8e9575ecd056

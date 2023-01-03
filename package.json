@@ -1,6 +1,6 @@
 {
   "name": "fe9-dogfood",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "./",
   "private": true,
   "dependencies": {
@@ -13,7 +13,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build -m 'Automatically update gh-pages [skip ci]'"
   },
   "eslintConfig": {
     "extends": [

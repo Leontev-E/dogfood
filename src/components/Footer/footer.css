@@ -1,13 +1,39 @@
 footer {
-    background-color: #222;
-    color: #fff;
+    background-color: rgb(220, 211, 39);
+    color: #000;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.footer__copy {
-    font-size: 1.5em;
+
+.footer_logo img {
+    padding-bottom: 50px;
 }
-.footer__text {
-    text-align: right;
+
+.footer_copy {
+    font-size: 0.9em;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contacts p {
+    font-weight: 500;
+}
+
+.phone {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.social-media {
+    margin-top: 10px;
+}
+
+.social-media a {
+    font-size: 1.5em;
+    margin-right: 10px;
 }

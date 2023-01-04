@@ -12,6 +12,7 @@ import Home from "./pages/Home.jsx";
 import Catalog from "./pages/Catalog.jsx";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
+import dataLocal from "./assets/data.json";
 
 import {Api} from "./Api";
 

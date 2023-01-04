@@ -1,23 +1,60 @@
 header {
     background-color: rgb(243, 231, 5);
     display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header-top {
+    margin-top: 20px;
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 30px;
+    grid-template: 30px;
 }
+
 .logo {
     font-size: 1.5em;
 }
+
 .search {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #222;
     outline: none;
 }
+
 .search:focus {
     border-bottom-color: #fff;
 }
+
 .menu {
     display: flex;
     gap: 1em;
+}
+
+.header-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header-bottom h1{
+    width: 320px;
+}
+
+.header-bottom h3 {
+    width: 500px;
+}
+
+.btn-link {
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 20px;
+    font-weight: 600;
+    height: 20px;
+}
+
+.btn-link:hover {
+    background-color: rgb(185, 181, 181);
 }

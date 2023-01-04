@@ -17,12 +17,23 @@ export default ({user, setUser, goods, searchGoods, setModalActive}) => {
         setUser("");
     }
     return <header>
-        <Link className="logo" to="/"><img src={logo} /></Link>
-        <Search data={goods} searchGoods={searchGoods}/>
-        <nav className="menu">
-            {user && <Link to="/profile">{user}</Link>}
-            {!user && <a href="" onClick={logIn}>Войти</a>}
-            {user && <a href="" onClick={logOut}>Выйти</a>}
-        </nav>
+            <div className="header-top">
+                <Link className="logo" to="/">
+                    <img src={logo} />
+                </Link>
+                <Search data={goods} searchGoods={searchGoods} />
+                <nav className="menu">
+                    {user && <Link to="/profile">{user}</Link>}
+                    {!user && <a href="" onClick={logIn}>Войти</a>}
+                    {user && <a href="" onClick={logOut}>Выйти</a>}
+                </nav>
+                </div>
+                <div className="header-bottom">
+                    <h1>Крафтовые лакомства для собак</h1>
+                    <h3>Всегда свежие лакомства ручной работы с доставкой на дом по России и всему миру</h3>
+                <Link className="btn-link" to="/catalog">
+                    Каталог
+                </Link>
+            </div>
     </header>
 }

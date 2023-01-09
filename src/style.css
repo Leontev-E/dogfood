@@ -9,7 +9,7 @@ a {
 .container {
     min-height: 100vh;
     display: grid;
-    grid-template-rows: 260px auto 200px;
+    grid-template-rows: 300px auto 200px;
 }
 .container>* {
     padding: 0 calc(50% - 600px);

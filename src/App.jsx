@@ -16,6 +16,8 @@ import dataLocal from "./assets/data.json";
 
 import {Api} from "./Api";
 
+const dataHome = dataLocal;
+
 const smiles = [<span>^_^</span>, "=)", "O_o", ";(", "^_0", "@_@", "–_–"];
 
 const App = () => {

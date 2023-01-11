@@ -15,6 +15,10 @@ import Product from "./pages/Product";
 import dataLocal from "./assets/data.json";
 
 import {Api} from "./Api";
+import Ctx from "./Ctx";
+
+const PATH = "/";
+// const PATH = "/dogfood/";
 
 const dataHome = dataLocal;
 
@@ -70,11 +74,16 @@ const App = () => {
     }, [goods])
 
     return (
-        <>
+        <Ctx.Provider value={{
+            user: user,
+            token: token,
+            api: api,
+            setUser: setUser,
+            setToken: setToken,
+            setApi: setApi
+        }}>
             <div className="container">
                 <Header 
-                    user={user} 
-                    setUser={setUser} 
                     goods={goods}
                     searchGoods={setVisibleGoods}
                     setModalActive={setModalActive}
@@ -82,10 +91,10 @@ const App = () => {
                 <main>
                     {/* {user ? <Catalog data={goods}/> : <Home data={smiles}/>} */}
                     <Routes>
-                        <Route path="/" element={<Home data={smiles}/>}/>
-                        <Route path="/catalog" element={<Catalog data={visibleGoods}/>}/>
-                        <Route path="/profile" element={<Profile setUser={setUser} user={user}/>}/>
-                        <Route path="/catalog/:id" element={<Product/>}/>
+                        <Route path={PATH} element={<Home data={smiles}/>}/>
+                        <Route path={PATH + "catalog"} element={<Catalog data={visibleGoods}/>}/>
+                        <Route path={PATH + "profile"} element={<Profile/>}/>
+                        <Route path={PATH + "catalog/:id"} element={<Product/>}/>
                     </Routes>
                 </main>
                 <Footer/>
@@ -94,8 +103,8 @@ const App = () => {
                 isActive, setState - параметры, которые работают внутри компонента Modal
                 modalActive, setModalActive - значения, которые сохраняются внутри параметров
             */}
-            <Modal isActive={modalActive} setState={setModalActive} api={api} setToken={setToken}/>
-        </>
+            <Modal isActive={modalActive} setState={setModalActive}/>
+        </Ctx.Provider>
     )
 }
 export default App;

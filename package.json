@@ -1,7 +1,7 @@
 {
   "name": "fe9-dogfood",
   "version": "0.1.1",
-  "homepage": "./",
+  "homepage": "/dogfood/",
   "private": true,
   "dependencies": {
     "react": "^18.2.0",

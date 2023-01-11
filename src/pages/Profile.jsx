@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
 import {useNavigate} from "react-router-dom";
+import Ctx from "../Ctx";
 
-export default ({setUser, user}) => {
+export default () => {
+    const {user, setUser} = useContext(Ctx);
+    console.log(user);
     const navigate = useNavigate();
 
     const logOut = (e) => {

@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "./static/css/main.3e490590.css",
+    "main.js": "./static/js/main.9ff230e0.js",
+    "static/media/five.png": "./static/media/five.65d6c17adb5b1a3bb125.png",
+    "static/media/four.png": "./static/media/four.53064e3392a9f2220532.png",
+    "static/media/banner.png": "./static/media/banner.9eb40518fd9cbae3768b.png",
+    "static/media/dog.png": "./static/media/dog.1ee46d7d46bd484f2543.png",
+    "static/media/one.png": "./static/media/one.287cc59738a5e4adaf7e.png",
+    "static/media/three.png": "./static/media/three.eda6aa51fdb4daedabf0.png",
+    "static/media/pic.jpg": "./static/media/pic.d968868df6823223ae8f.jpg",
+    "static/media/two.png": "./static/media/two.cc6e5222ad89a94d829b.png",
+    "static/media/logo.svg": "./static/media/logo.451d3e7a122ed0d35f9fbc7c206aeef3.svg",
+    "index.html": "./index.html",
+    "static/media/circle-xmark-regular.svg": "./static/media/circle-xmark-regular.8ef6e0a127f37e5c70a1e4bb4cb92f32.svg",
+    "static/media/magnifying-glass-solid.svg": "./static/media/magnifying-glass-solid.06e310dbfbf3ab21da478aef6c037c14.svg",
+    "main.3e490590.css.map": "./static/css/main.3e490590.css.map",
+    "main.9ff230e0.js.map": "./static/js/main.9ff230e0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3e490590.css",
+    "static/js/main.9ff230e0.js"
+  ]
+}

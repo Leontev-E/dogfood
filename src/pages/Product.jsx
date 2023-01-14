@@ -1,44 +1,48 @@
-import React, { useState, useEffect } from "react";
-import {useParams, Link} from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import {useParams, Link, useNavigate} from "react-router-dom";
+import {Trash3} from "react-bootstrap-icons"
 import Review from "../components/Review/review";
+import Ctx from "../Ctx";
 
 export default ({}) => {
     const {id} = useParams();
     const [product, setProduct] = useState({});
-    const [users, setUsers] = useState([]);
     // По id товара получаются данные о товаре для отрисовки страницы с товаром
-    let token = localStorage.getItem("token8");
+    const {api, PATH, user, setGoods} = useContext(Ctx);
+    const navigate = useNavigate();
     useEffect(() => {
-        if (token) {
-            fetch(`https://api.react-learning.ru/products/${id}`, {
-                headers: {
-                    authorization: `Bearer ${token}`
-                }
-            })
+        api.getProduct(id)
             .then(res => res.json())
             .then(data => {
                 setProduct(data);
             })
-        }
-    })
-    // useEffect(() => {
-    //     if (token) {
-    //         fetch(`https://api.react-learning.ru/v2/group-8/users`, {
-    //             headers: {
-    //                 authorization: `Bearer ${token}`
-    //             }
-    //         })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setUsers(data);
-    //             console.log(data);
-    //         })
-    //     }
-    // })
+    }, []);
+    const btnSt = {
+        position: "absolute",
+        right: "20px",
+        top: "250px",
+        cursor: "pointer",
+        height: "auto"
+    }
+    const remove = () => {
+        api.delProduct(id)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (!data.error) {
+                    setGoods(prev => prev.filter(g => g._id !== data._id))
+                    navigate(`${PATH}catalog`);
+                }
+            })
+    }
+
     return <>
+        {product && product.author && product.author._id === user._id && <button onClick={remove} className="btn" style={btnSt}>
+            <Trash3/>
+        </button>}
         <h1>{product.name || "Страница товара"}</h1>
         <p>{id}</p>
-        <Link to="/catalog">Назад</Link>
+        <Link to={PATH +"catalog"}>Назад</Link>
         <h2>Отзывы</h2>
         <div className="reviews">
             {product.reviews && product.reviews.length > 0 && product.reviews.map((el, i) => <Review {...el} key={i}/>)}

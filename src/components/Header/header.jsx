@@ -2,13 +2,14 @@ import React, {useState, useContext} from "react";
 import {Link} from "react-router-dom";
 import Search from "../Search/search";
 import Ctx from "../../Ctx";
+import { PlusCircle } from "react-bootstrap-icons";
 
 import "./header.css";
 
 import logo from "../Logo/logo.svg";
 
-export default ({goods, searchGoods, setModalActive}) => {
-    const {user, setUser} = useContext(Ctx);
+export default () => {
+    const {user, setUser, setModalActive, PATH} = useContext(Ctx);
 
     const logIn = (e) => {
         e.preventDefault();
@@ -21,12 +22,13 @@ export default ({goods, searchGoods, setModalActive}) => {
     }
     return <header>
             <div className="header-top">
-                <Link className="logo" to="/">
+                <Link className="logo" to={PATH}>
                     <img src={logo} />
                 </Link>
-                <Search data={goods} searchGoods={searchGoods} />
+                <Search/>
                 <nav className="menu">
-                    {user && <Link to="/profile">{user}</Link>}
+                    {user && <Link to={PATH +"add"}><PlusCircle/></Link>}
+                    {user && user.name && <Link to={PATH +"profile"}>{user.name}</Link>}
                     {!user && <a href="" onClick={logIn}>Войти</a>}
                     {user && <a href="" onClick={logOut}>Выйти</a>}
                 </nav>

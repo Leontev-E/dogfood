@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from "react";
-// Router - маршрут
 import {Routes, Route} from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
-// import products from "./assets/data.json";
 
 import Header from "./components/Header/header";
 import Footer from "./components/Footer/footer";
@@ -13,19 +12,25 @@ import Catalog from "./pages/Catalog.jsx";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import dataLocal from "./assets/data.json";
+import AddForm from "./pages/AddForm";
 
 import {Api} from "./Api";
 import Ctx from "./Ctx";
 
 const PATH = "/";
 // const PATH = "/dogfood/";
+// "homepage": "/dogfood/",
 
 const dataHome = dataLocal;
 
 const smiles = [<span>^_^</span>, "=)", "O_o", ";(", "^_0", "@_@", "–_–"];
 
 const App = () => {
-    const [user, setUser] = useState(localStorage.getItem("user8"));
+    let usr = localStorage.getItem("user8");
+    if (usr) {
+        usr = JSON.parse(usr);
+    }
+    const [user, setUser] = useState(usr);
     const [token, setToken] = useState(localStorage.getItem("token8"));
     const [modalActive, setModalActive] = useState(false);
     const [api, setApi] = useState(new Api(token));
@@ -36,7 +41,6 @@ const App = () => {
         console.log("Hello!")
         console.log(token);
         if (token) {
-            // загрузить данные с сервера
             api.getProducts()
                 .then(res => res.json())
                 .then(data => {
@@ -44,12 +48,14 @@ const App = () => {
                     setGoods(data.products);
                 })
         }
-    }, []) // функция отработает один раз при создании компонента
+    }, [])
 
     useEffect(() => {
-        console.log("Change token");
         setApi(new Api(token));
-        setUser(localStorage.getItem("user8"));
+        let usr = localStorage.getItem("user8");
+            if (usr) {
+                usr = JSON.parse(usr);
+        }
     }, [token])
 
     useEffect(() => {
@@ -61,10 +67,10 @@ const App = () => {
 
     useEffect(() => {
         if (token) {
-            // загрузить данные с сервера
             api.getProducts()
                 .then(res => res.json())
                 .then(data => {
+                    console.log(data)
                     setGoods(data.products);
                 })
         }
@@ -73,6 +79,10 @@ const App = () => {
         setVisibleGoods(goods);
     }, [goods])
 
+    useEffect(() => {
+        console.log("Привет!!!!!!!!!!!!!!", visibleGoods)
+    }, [visibleGoods])
+    
     return (
         <Ctx.Provider value={{
             user: user,
@@ -80,30 +90,28 @@ const App = () => {
             api: api,
             setUser: setUser,
             setToken: setToken,
-            setApi: setApi
+            setApi: setApi,
+            goods: goods,
+            setModalActive: setModalActive,
+            setGoods: setGoods,
+            setVisibleGoods: setVisibleGoods,
+            visibleGoods: visibleGoods,
+            PATH: PATH
         }}>
-            <div className="container">
-                <Header 
-                    goods={goods}
-                    searchGoods={setVisibleGoods}
-                    setModalActive={setModalActive}
-                />
+            <div className="wrapper">
+                <Header/>
                 <main>
-                    {/* {user ? <Catalog data={goods}/> : <Home data={smiles}/>} */}
                     <Routes>
                         <Route path={PATH} element={<Home data={smiles}/>}/>
-                        <Route path={PATH + "catalog"} element={<Catalog data={visibleGoods}/>}/>
-                        <Route path={PATH + "profile"} element={<Profile/>}/>
-                        <Route path={PATH + "catalog/:id"} element={<Product/>}/>
+                        <Route path={PATH +"catalog"} element={<Catalog data={visibleGoods}/>}/>
+                        <Route path={PATH +"profile"} element={<Profile/>}/>
+                        <Route path={PATH +"catalog/:id"} element={<Product/>}/>
+                        <Route path={PATH +"add"} element={<AddForm/>}/>
                     </Routes>
                 </main>
                 <Footer/>
             </div>
-            {/* 
-                isActive, setState - параметры, которые работают внутри компонента Modal
-                modalActive, setModalActive - значения, которые сохраняются внутри параметров
-            */}
-            <Modal isActive={modalActive} setState={setModalActive}/>
+            <Modal/>
         </Ctx.Provider>
     )
 }

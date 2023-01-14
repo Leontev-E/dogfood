@@ -30,6 +30,31 @@ class Api {
             }
         })
     }
+    getProduct(id) {
+        return fetch(`${this.path}/products/${id}`, {
+            headers: {
+                "authorization": `Bearer ${this.token}`
+            }
+        })
+    }
+    addProduct(body) {
+        return fetch(`${this.path}/products`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${this.token}`
+            },
+            body: JSON.stringify(body)
+        });
+    }
+    delProduct(id) {
+        return fetch(`${this.path}/products/${id}`, {
+            method: "DELETE",
+            headers: {
+                "authorization": `Bearer ${this.token}`
+            }
+        })
+    }
 }
 
 export {Api};

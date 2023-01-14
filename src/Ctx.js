@@ -1,10 +1,16 @@
 import React from "react";
 
 export default React.createContext({
-    user: "",
+    user: {},
     token: "",
     api: {},
     setUser: () => {},
     setToken: () => {},
-    setApi: () => {}
+    setApi: () => {},
+    modalActive: false,
+    setmodalActive: () => {},
+    goods: [],
+    setGoods: () => {},
+    visibleGoods: [],
+    setVisibleGoods: () => {}
 });

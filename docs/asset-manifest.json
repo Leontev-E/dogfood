@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/dogfood/static/css/main.5f10cdd1.css",
-    "main.js": "/dogfood/static/js/main.b5e4d4bc.js",
-    "static/media/five.png": "/dogfood/static/media/five.65d6c17adb5b1a3bb125.png",
-    "static/media/four.png": "/dogfood/static/media/four.53064e3392a9f2220532.png",
-    "static/media/banner.png": "/dogfood/static/media/banner.9eb40518fd9cbae3768b.png",
-    "static/media/dog.png": "/dogfood/static/media/dog.1ee46d7d46bd484f2543.png",
-    "static/media/one.png": "/dogfood/static/media/one.287cc59738a5e4adaf7e.png",
-    "static/media/three.png": "/dogfood/static/media/three.eda6aa51fdb4daedabf0.png",
-    "static/media/pic.jpg": "/dogfood/static/media/pic.d968868df6823223ae8f.jpg",
-    "static/media/two.png": "/dogfood/static/media/two.cc6e5222ad89a94d829b.png",
-    "static/media/logo.svg": "/dogfood/static/media/logo.451d3e7a122ed0d35f9fbc7c206aeef3.svg",
-    "index.html": "/dogfood/index.html",
-    "static/media/circle-xmark-regular.svg": "/dogfood/static/media/circle-xmark-regular.8ef6e0a127f37e5c70a1e4bb4cb92f32.svg",
-    "static/media/magnifying-glass-solid.svg": "/dogfood/static/media/magnifying-glass-solid.06e310dbfbf3ab21da478aef6c037c14.svg",
-    "main.5f10cdd1.css.map": "/dogfood/static/css/main.5f10cdd1.css.map",
-    "main.b5e4d4bc.js.map": "/dogfood/static/js/main.b5e4d4bc.js.map"
+    "main.css": "./static/css/main.020479ac.css",
+    "main.js": "./static/js/main.71483136.js",
+    "static/media/five.png": "./static/media/five.65d6c17adb5b1a3bb125.png",
+    "static/media/four.png": "./static/media/four.53064e3392a9f2220532.png",
+    "static/media/banner.png": "./static/media/banner.9eb40518fd9cbae3768b.png",
+    "static/media/dog.png": "./static/media/dog.1ee46d7d46bd484f2543.png",
+    "static/media/one.png": "./static/media/one.287cc59738a5e4adaf7e.png",
+    "static/media/three.png": "./static/media/three.eda6aa51fdb4daedabf0.png",
+    "static/media/pic.jpg": "./static/media/pic.d968868df6823223ae8f.jpg",
+    "static/media/two.png": "./static/media/two.cc6e5222ad89a94d829b.png",
+    "static/media/logo.svg": "./static/media/logo.451d3e7a122ed0d35f9fbc7c206aeef3.svg",
+    "index.html": "./index.html",
+    "static/media/circle-xmark-regular.svg": "./static/media/circle-xmark-regular.8ef6e0a127f37e5c70a1e4bb4cb92f32.svg",
+    "static/media/magnifying-glass-solid.svg": "./static/media/magnifying-glass-solid.06e310dbfbf3ab21da478aef6c037c14.svg",
+    "main.020479ac.css.map": "./static/css/main.020479ac.css.map",
+    "main.71483136.js.map": "./static/js/main.71483136.js.map"
   },
   "entrypoints": [
-    "static/css/main.5f10cdd1.css",
-    "static/js/main.b5e4d4bc.js"
+    "static/css/main.020479ac.css",
+    "static/js/main.71483136.js"
   ]
 }

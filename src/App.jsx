@@ -38,13 +38,10 @@ const App = () => {
     const [visibleGoods, setVisibleGoods] = useState(goods);
 
     useEffect(() => {
-        console.log("Hello!")
-        console.log(token);
         if (token) {
             api.getProducts()
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
                     setGoods(data.products);
                 })
         }
@@ -70,7 +67,6 @@ const App = () => {
             api.getProducts()
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
                     setGoods(data.products);
                 })
         }
@@ -80,7 +76,6 @@ const App = () => {
     }, [goods])
 
     useEffect(() => {
-        console.log("Привет!!!!!!!!!!!!!!", visibleGoods)
     }, [visibleGoods])
     
     return (

@@ -3,10 +3,10 @@ import Card from "../components/Card";
 import {Link} from "react-router-dom";
 import {EmojiFrown} from "react-bootstrap-icons";
 import Ctx from "../Ctx";
+import "./style.css";
 
 export default () => {
     const {visibleGoods} = useContext(Ctx);
-    console.log(visibleGoods)
     return <>
         {visibleGoods.length > 0 
             ? <>

@@ -25,11 +25,9 @@ export default ({change, close}) => {
             email: inp1,
             password: inp2
         }
-        console.log(body);
         api.signUp(body)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (!data.err) {
                     api.signIn(body)
                         .then(res => res.json())

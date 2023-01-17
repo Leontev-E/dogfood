@@ -7,7 +7,7 @@ export default ({name, pictures, price, _id, author}) => {
     const like = author._id === user.id;
     return <div className="card">
         <img src={pictures} alt={name} style={{height: "100px"}}/>
-        {name}
+        <h5>{name}</h5>
         <h6>{price} Руб</h6>
         <button className="btn">Купить</button>
         <span className="card__heart">

@@ -3,7 +3,6 @@ header {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    /* margin-bottom: -5em; */
 }
 
 .header-top {
@@ -48,14 +47,6 @@ header {
     width: 500px;
 }
 
-.btn-link {
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 20px;
-    font-weight: 600;
-    height: 20px;
-}
-
-.btn-link:hover {
-    background-color: rgb(185, 181, 181);
+.btn {
+    height: 50px !important;
 }

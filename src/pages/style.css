@@ -87,3 +87,11 @@
     height: auto;
     border-radius: 10px;
 }
+
+.card {
+    background-color: #F2F1FC;
+}
+
+.card > button {
+    font-size: 1.2em;
+}

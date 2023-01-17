@@ -26,11 +26,9 @@ export default () => {
             discount: discount,
             pictures: pictures
         }
-        console.log(body)
         api.addProduct(body)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (!data.error) {
                     setGoods(prev => [...prev, data]);
                     clear();

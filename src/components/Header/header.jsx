@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useContext} from "react";
 import {Link} from "react-router-dom";
 import Search from "../Search/search";
 import Ctx from "../../Ctx";
@@ -36,7 +36,7 @@ export default () => {
                 <div className="header-bottom">
                     <h1>Крафтовые лакомства для собак</h1>
                     <h3>Всегда свежие лакомства ручной работы с доставкой на дом по России и всему миру</h3>
-                <Link className="btn-link" to="/catalog">
+                <Link className="btn btn-secondary btn-lg" to="/catalog">
                     Каталог
                 </Link>
             </div>

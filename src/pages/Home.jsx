@@ -49,7 +49,7 @@ export default ({data}) => {
                     </div>
                     <img className="block-img" src={four} />
                 </div>
-                <div className="block five-block">
+                <div className="description five-block">
                     <div>
                         <h3>Игрушка - погремушка</h3>
                         <p>для мелких пород</p>

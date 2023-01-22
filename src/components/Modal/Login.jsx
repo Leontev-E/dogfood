@@ -16,7 +16,6 @@ export default ({change, close}) => {
         api.signIn(body)
             .then(res => res.json())
             .then(data => {
-                // Не забыть отловить сообщение с ошибкой
                 localStorage.setItem("user8", JSON.stringify(data.data));
                 localStorage.setItem("token8", data.token);
                 setToken(data.token);

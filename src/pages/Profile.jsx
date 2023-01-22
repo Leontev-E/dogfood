@@ -4,7 +4,6 @@ import Ctx from "../Ctx";
 
 export default () => {
     const {user, setUser} = useContext(Ctx);
-    console.log(user);
     const navigate = useNavigate();
 
     const logOut = (e) => {

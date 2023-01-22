@@ -7,19 +7,23 @@ import Login from "./Login";
 
 export default () => {
     const [auth, setAuth] = useState(true);
-    const {modalActive, setmodalActive} = useContext(Ctx);
+    const {modalActive, setModalActive} = useContext(Ctx);
+
     let style = {
         display: modalActive && "flex",
     }
-    return <div className="modal-container" style={style}>
-        <div className="modal">
-            <div className="modal-close" onClick={() => setmodalActive(false)}/>
+    console.log(modalActive)
+
+
+    return <div className="modal-containerr" style={style}>
+        <div className="modall">
+            <div className="modall-close" onClick={() => setModalActive(false)}>x</div>
             <h2>{auth ? "Войти" : "Зарегистрироваться"}</h2>
             {auth 
                 ? 
-                <Login change={setAuth} close={setmodalActive}/> 
+                <Login change={setAuth} close={setModalActive}/> 
                 : 
-                <Signup change={setAuth} close={setmodalActive}/>
+                <Signup change={setAuth} close={setModalActive}/>
             }
         </div>
     </div>

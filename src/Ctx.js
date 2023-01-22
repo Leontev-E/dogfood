@@ -8,9 +8,11 @@ export default React.createContext({
     setToken: () => {},
     setApi: () => {},
     modalActive: false,
-    setmodalActive: () => {},
+    setModalActive: () => {},
     goods: [],
     setGoods: () => {},
     visibleGoods: [],
-    setVisibleGoods: () => {}
+    setVisibleGoods: () => {},
+    favorites: [],
+    setFavorites: () => {}
 });

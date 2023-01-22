@@ -6,13 +6,14 @@
 }
 
 .one {
-    margin-top: 30px;
+    margin-top: 20px;
     grid-template-columns: repeat(2, 1fr);
 }
 
 .two {
-    margin-top: 30px;
+    margin-top: 20px;
     grid-template-columns: repeat(3, 1fr);
+    max-width: 300px;
 }
 
 .description {
@@ -30,13 +31,12 @@
 .five-block {
     display: flex;
     justify-content: space-between;
-    gap: 30px;
+    gap: 20px;
     align-items: center;
     background-color: #DF9441;
     padding: 20px;
     border-radius: 20px;
     color: #fff;
-    box-sizing: border-box;
 }
 
 .three-block {
@@ -71,6 +71,7 @@
     color: #fff;
     margin: 20px 0px 0px;
     box-sizing: border-box;
+    margin-top: 20px;
 }
 
 .banner h2 {

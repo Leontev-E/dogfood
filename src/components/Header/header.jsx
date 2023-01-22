@@ -2,14 +2,16 @@ import React, {useContext} from "react";
 import {Link} from "react-router-dom";
 import Search from "../Search/search";
 import Ctx from "../../Ctx";
-import { PlusCircle } from "react-bootstrap-icons";
+import { PlusCircle, HeartFill } from "react-bootstrap-icons";
+import {Badge} from "react-bootstrap";
 
 import "./header.css";
 
 import logo from "../Logo/logo.svg";
+import Favorites from "../../pages/Favorites";
 
 export default () => {
-    const {user, setUser, setModalActive, PATH} = useContext(Ctx);
+    const {user, setUser, setModalActive, PATH, favorites} = useContext(Ctx);
 
     const logIn = (e) => {
         e.preventDefault();
@@ -20,6 +22,7 @@ export default () => {
         localStorage.removeItem("user8");
         setUser("");
     }
+
     return <header>
             <div className="header-top">
                 <Link className="logo" to={PATH}>
@@ -27,8 +30,12 @@ export default () => {
                 </Link>
                 <Search/>
                 <nav className="menu">
-                    {user && <Link to={PATH +"add"}><PlusCircle/></Link>}
-                    {user && user.name && <Link to={PATH +"profile"}>{user.name}</Link>}
+                    {user && <Link to={PATH + "add"}><PlusCircle style={{fontSize: "20px"}}/></Link>}
+                    {user && <Link to={PATH + "favorites"} className="badge-link">
+                        <HeartFill style={{fontSize: "20px"}}/>
+                        <Badge bg="light" text="dark">{favorites.length}</Badge>
+                    </Link>}
+                    {user && user.name && <Link to={PATH + "profile"}>{user.name}</Link>}
                     {!user && <a href="" onClick={logIn}>Войти</a>}
                     {user && <a href="" onClick={logOut}>Выйти</a>}
                 </nav>

@@ -3,15 +3,14 @@ import Card from "../components/Card";
 import {Link} from "react-router-dom";
 import {EmojiFrown} from "react-bootstrap-icons";
 import Ctx from "../Ctx";
-import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
-import "./style.css";
+import Pagination from "../components/Pagination";
 
 export default () => {
-    const {visibleGoods} = useContext(Ctx);
-    const paginate = usePagination(visibleGoods, 12);
+    const {favorites, PATH} = useContext(Ctx);
+    const paginate = usePagination(favorites, 4);
     return <>
-        {visibleGoods.length > 0 
+        {favorites.length > 0 
             ? <>
                 <h1>Каталог товаров</h1>
                 <Pagination hook={paginate}/>
@@ -20,12 +19,11 @@ export default () => {
                         <Card key={"card_" + i} {...el}/>
                     </Link>)}
                 </div>
-                <Pagination hook={paginate}/>
             </>
             : <div className="empty-block">
                 <EmojiFrown/>
-                <p>Простите, по вашему запросу товаров не найдено</p>
-                <Link to="/" className="btn">На главную</Link>
+                <p>Вы еще не добавили ни одного любимого товара</p>
+                <Link to={PATH+"catalog"} className="btn">В каталог</Link>
             </div>
         }
     </>

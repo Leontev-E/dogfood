@@ -3,13 +3,15 @@ import {useParams, Link, useNavigate} from "react-router-dom";
 import {Trash3} from "react-bootstrap-icons"
 import Review from "../components/Review/review";
 import Ctx from "../Ctx";
-import {Container, Row, Col, Figure, Table, ButtonGroup, Button, Tabs, Tab, Nav} from "react-bootstrap";
-import "./Product.css";
+import {Container, Row, Col, Figure, Table, ButtonGroup, Button} from "react-bootstrap";
+import data from "../assets/data.json";
 
-export default ({name, pictures, price, _id, author}) => {
+
+export default ({}) => {
     const {id} = useParams();
+    let p = data[0];
     const [product, setProduct] = useState({});
-    // По id товара получаются данные о товаре для отрисовки страницы с товаром
+    const [cnt, setCnt] = useState(0);
     const {api, PATH, user, setGoods} = useContext(Ctx);
     const navigate = useNavigate();
     useEffect(() => {
@@ -17,8 +19,9 @@ export default ({name, pictures, price, _id, author}) => {
             .then(res => res.json())
             .then(data => {
                 setProduct(data);
+                console.log(data.reviews)
             })
-    }, []);
+    });
     const btnSt = {
         position: "absolute",
         right: "20px",
@@ -37,47 +40,68 @@ export default ({name, pictures, price, _id, author}) => {
             })
     }
 
-    return <>
-    
-        {product && product.author && product.author._id === user._id && <button onClick={remove} className="btn" style={btnSt}>
-            <Trash3/>
-        </button>}
-        <Row>
-        <Col xs={12} md={6}>
-        <img src={product.pictures} alt={name} style={{maxWidth: "500px"}}/>
-        </Col>
-        <Col xs={12} md={6}>
-        <h1>{product.name || "Страница товара"}</h1>
-        <h5>Стоимость: {product.price}₽</h5>
-        <h5>СКИДКА: {product.discount}%</h5>
-        <p>Описание товара: {product.description}</p>
-        <p>Вес товара: {product.wight}</p>
-        <p>Колличество на складе: {product.stock} шт.</p>
-        </Col>
-        <button className="btn">В корзину</button>
-
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Главная</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Профиль</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Контакт</button>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">..1.</div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">..2.</div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">..3.</div>
-</div>
-
-        <Link to={PATH +"catalog"}>Назад</Link>
-        <h2>Отзывы</h2>
-        <div className="reviews">
-            {product.reviews && product.reviews.length > 0 && product.reviews.map((el, i) => <Review {...el} key={i}/>)}
-        </div>
-        </Row>
-    </>
+    return <Container>
+        {product._id &&
+            <Row>
+                <Col xs={12}>
+                <h1>{product.name || "Страница товара"}</h1>
+                </Col>
+                <Col xs={8}>
+                    <Figure>
+                        <Figure.Image className="img-fluid" src={product.pictures}/>
+                    </Figure>
+                </Col>
+                <Col xs={12} md={4}>
+                    {/* {product.discount && <small><del>{product.price} ₽</del></small>}
+                    <div><strong className={product.discount ? "text-danger" : "text-dark"}>{Math.ceil(product.price * ((100 - product.discount) / 100))} ₽</strong></div> */}
+                    <Row>
+                        <Col md={6}>
+                        {/* <ButtonGroup>
+                            <Button size="sm" variant="light" disabled={!cnt} onClick={e => setCnt(cnt - 1)}>-</Button>
+                            <Button size="sm" variant="light" disabled>{cnt}</Button>
+                            <Button size="sm" variant="light" onClick={e => setCnt(cnt + 1)}>+</Button>
+                        </ButtonGroup> */}
+                        </Col>
+                        <Col md={6}>
+                        <Button size="sm" variant="warning">В корзину</Button>
+                        </Col>
+                    </Row>
+                </Col>
+                <Col xs={12}>
+                    <h2>Описание</h2>
+                    <p>{product.description}</p>
+                </Col>
+                <Col xs={12}>
+                    <h2>Характеристики</h2>
+                    <Table hover>
+                        <tbody>
+                            <tr>
+                                <th>Вес</th>
+                                <td>{product.wight} г.</td>
+                            </tr>
+                            <tr>
+                                <th>Цена</th>
+                                <td>{product.price} ₽ за {product.wight} г.</td>
+                            </tr>
+                            <tr>
+                                <th>Остаток на складе</th>
+                                <td>{product.stock} шт.</td>
+                            </tr>
+                            <tr>
+                                <th>Польза</th>
+                                <td>{product.description}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </Col>
+                <Col xs={12}>
+                    <h2>Отзывы</h2>
+                    
+                    <div className="reviews">
+                      {product.reviews && product.reviews.length > 0 && product.reviews.map((el, i) => <Review {...el} key={i}/>)}
+                    </div>
+                </Col>
+            </Row>
+        }
+    </Container>
 }

@@ -96,3 +96,35 @@
 .card > button {
     font-size: 1.2em;
 }
+
+.btn-prof {
+    margin: 20px;
+}
+
+.name {
+    text-align: end;
+}
+
+.heading {
+    text-align: center;
+    margin-top: -70px;
+}
+
+.head-description {
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+.description {
+    text-align: center;
+    margin-left: 30px;
+}
+
+.buy {
+    margin-left: 30px;
+}
+
+.head {
+    text-align: center;
+}

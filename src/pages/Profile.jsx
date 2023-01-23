@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import {useNavigate} from "react-router-dom";
 import Ctx from "../Ctx";
+import Favorites from "./Favorites";
 
 export default () => {
     const {user, setUser} = useContext(Ctx);
@@ -13,8 +14,10 @@ export default () => {
         navigate("/");
     }
     return <>
-        <h1>Личный кабинет</h1>
-        <p>Привет, {user && user.name}</p>
-        <a href="" onClick={logOut} style={{color: "orange"}}>Выйти из аккаунта</a>
+        <h1 className="heading">Личный кабинет</h1>
+        <h4 className="name">Привет, {user && user.name}!</h4>
+        <Favorites/>
+        <button className="btn btn-prof" href="" onClick={logOut}>Выйти из аккаунта</button>
+
     </>
 }

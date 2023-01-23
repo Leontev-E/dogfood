@@ -76,9 +76,9 @@ export default ({}) => {
     };
 
     return <>
-    <p>
-    <Link to={PATH+"./"}>главная</Link>&nbsp;-&nbsp;
-    <Link to={PATH+"catalog"}>каталог</Link>&nbsp;-&nbsp;
+    <p className="breadcrumbs">
+    <Link to={PATH+"./"}>Главная</Link>&nbsp;-&nbsp;
+    <Link to={PATH+"catalog"}>Каталог</Link>&nbsp;-&nbsp;
     {product.name || "Страница товара"}
     </p>
         {product && product.author && product.author._id === user._id && <button 

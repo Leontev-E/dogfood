@@ -1,7 +1,7 @@
 {
   "name": "fe9-dogfood",
   "version": "0.1.1",
-  "homepage": "/dogfood/",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",

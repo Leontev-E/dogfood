@@ -19,8 +19,8 @@ import {Api} from "./Api";
 import Ctx from "./Ctx";
 import Favorites from "./pages/Favorites";
 
-// const PATH = "/";
-const PATH = "/dogfood/";
+const PATH = "/";
+// const PATH = "/dogfood/";
 // "homepage": "/dogfood/",
 // "homepage": "./",
 

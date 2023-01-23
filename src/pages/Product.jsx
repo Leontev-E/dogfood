@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import {useParams, Link, useNavigate} from "react-router-dom";
+import {useParams, Link, useNavigate, Route} from "react-router-dom";
 import {Trash3} from "react-bootstrap-icons"
 import Review from "../components/Review/review";
 import Ctx from "../Ctx";
@@ -42,6 +42,16 @@ export default ({}) => {
                 }
             })
     }
+    // const Breadcrumbs = () => {
+    //     const breadcrumbs = useBreadcrumbs();
+      
+    //     return (
+    //       <React.Fragment>
+    //         {breadcrumbs.map(({ breadcrumb }) => breadcrumb)}
+    //       </React.Fragment>
+    //     );
+    //   };
+
     const submit = (e) => {
         e.preventDefault();
         let body = {
@@ -66,6 +76,11 @@ export default ({}) => {
     };
 
     return <>
+    <p>
+    <Link to={PATH+"./"}>главная</Link>&nbsp;-&nbsp;
+    <Link to={PATH+"catalog"}>каталог</Link>&nbsp;-&nbsp;
+    {product.name || "Страница товара"}
+    </p>
         {product && product.author && product.author._id === user._id && <button 
             onClick={remove} 
             className="btn" 
@@ -76,9 +91,9 @@ export default ({}) => {
     <Container>
         {product._id &&
             <Row>
-                <Col xs={12}>
+                {/* <Col xs={12}>
                     <h1>{product.name || "Страница товара"}</h1>
-                </Col>
+                </Col> */}
                 <Col xs={8}>
                     <Figure>
                         <Figure.Image className="img-fluid" src={product.pictures}/>
@@ -96,11 +111,11 @@ export default ({}) => {
                         </ButtonGroup> */}
                         </Col>
                         <Col xs={12}>
-                            <h3 className="head">{product.name || "Страница товара"}</h3>
+                            <h1 className="head">{product.name || "Страница товара"}</h1>
                         </Col>
                         <Col md={12}>
                             <h4 className="head-description">Описание товара:</h4>
-                            <p className="description">{product.description}</p>
+                            <p className="description-product">{product.description}</p>
                         </Col>
                         <Col md={6}>
                         <Button type="button" className="buy" size="sm" variant="warning">В корзину</Button>

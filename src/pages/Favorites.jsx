@@ -15,7 +15,7 @@ export default () => {
                 <h1>Избранные товары</h1>
                 <Pagination hook={paginate}/>
                 <div className="cards">
-                    {paginate.setPageData().map((el, i) => <Link to={`/catalog/${el._id}`} key={el._id}>
+                    {paginate.setPageData().map((el, i) => <Link to={`${PATH}catalog/${el._id}`} key={el._id}>
                         <Card key={"card_" + i} {...el}/>
                     </Link>)}
                 </div>

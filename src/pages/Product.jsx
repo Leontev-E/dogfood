@@ -22,7 +22,6 @@ export default ({}) => {
             .then(res => res.json())
             .then(data => {
                 setProduct(data);
-                console.log(data.reviews)
             })
     });
     const btnSt = {

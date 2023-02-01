@@ -14,6 +14,7 @@ import Product from "./pages/Product";
 import dataLocal from "./assets/data.json";
 import AddForm from "./pages/AddForm";
 import Fake from "./pages/Fake";
+import Basket from "./pages/Basket";
 
 import {Api} from "./Api";
 import Ctx from "./Ctx";
@@ -40,6 +41,7 @@ const App = () => {
     const [goods, setGoods] = useState([]);
     const [visibleGoods, setVisibleGoods] = useState(goods);
     const [favorites, setFavorites] = useState([]);
+    const [basket, setBasket] = useState(localStorage.getItem("basket8") ? JSON.parse(localStorage.getItem("basket8")) : []);
 
     useEffect(() => {
         if (token) {
@@ -47,6 +49,7 @@ const App = () => {
             api.getProducts()
                 .then(res => res.json())
                 .then(data => {
+                    setVisibleGoods(data.products);
                     setGoods(data.products);
                 })
         }
@@ -79,7 +82,6 @@ const App = () => {
         }
     }, [api])
     useEffect(() => {
-        setVisibleGoods(goods);
         setFavorites(goods.filter(el => {
             return el.likes && el.likes.includes(user._id);
         }))
@@ -87,6 +89,10 @@ const App = () => {
 
     useEffect(() => {
     }, [visibleGoods])
+
+    useEffect(() => {
+        localStorage.setItem("basket8", JSON.stringify(basket));
+    }, [basket])
     
     return (
         <Ctx.Provider value={{
@@ -104,7 +110,9 @@ const App = () => {
             favorites: favorites,
             setFavorites: setFavorites,
             visibleGoods: visibleGoods,
-            PATH: PATH
+            PATH: PATH,
+            basket,
+            setBasket
         }}>
             <div className="wrapper">
                 <Header/>
@@ -116,6 +124,7 @@ const App = () => {
                         <Route path={PATH +"catalog/:id"} element={<Product/>}/>
                         <Route path={PATH +"add"} element={<AddForm/>}/>
                         <Route path={PATH +"favorites"} element={<Favorites/>}/>
+                        <Route path={PATH +"basket"} element={<Basket/>}/>
                         <Route path={PATH +"fake/:n/:title"} element={<Fake/>} />
                     </Routes>
                     {/* <ul>

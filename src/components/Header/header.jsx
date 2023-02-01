@@ -2,8 +2,9 @@ import React, {useContext} from "react";
 import {Link} from "react-router-dom";
 import Search from "../Search/search";
 import Ctx from "../../Ctx";
-import { PlusCircle, HeartFill } from "react-bootstrap-icons";
+import { PlusCircle, HeartFill, Cart2 } from "react-bootstrap-icons";
 import {Badge} from "react-bootstrap";
+import Basket from "../../pages/Basket";
 
 import "./header.css";
 
@@ -11,7 +12,7 @@ import logo from "../Logo/logo.svg";
 import Favorites from "../../pages/Favorites";
 
 export default () => {
-    const {user, setUser, setModalActive, PATH, favorites} = useContext(Ctx);
+    const {user, setUser, setModalActive, PATH, favorites, basket} = useContext(Ctx);
 
     const logIn = (e) => {
         e.preventDefault();
@@ -35,9 +36,13 @@ export default () => {
                         <HeartFill style={{fontSize: "20px"}}/>
                         <Badge bg="light" text="dark">{favorites.length}</Badge>
                     </Link>}
+                    {user && <Link to={PATH + "basket"} className="badge-link">
+                        <Cart2 style={{fontSize: "20px"}}/>
+                        <Badge bg="light" text="dark">{basket.reduce((acc, el) => acc + el.cnt, 0)}</Badge>
+                    </Link>}
                     {user && user.name && <Link to={PATH + "profile"}>{user.name}</Link>}
                     {!user && <a href="" onClick={logIn}>Войти</a>}
-                    {user && <a href="" onClick={logOut}>Выйти</a>}
+                    {/* {user && <a href="" onClick={logOut}>Выйти</a>} */}
                 </nav>
                 </div>
                 <div className="header-bottom">

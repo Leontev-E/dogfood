@@ -3,7 +3,7 @@ import "./index.css";
 import Ctx from "../../Ctx";
 
 export default ({ name, pictures, price, likes, _id }) => {
-    const { user, setFavorites, api, setGoods, setBasket } = useContext(Ctx);
+    const { user, setFavorites, api, setGoods, setBasket, setVisibleGoods } = useContext(Ctx);
     const [like, setLike] = useState(likes && likes.includes(user._id));
     const [flag, setFlag] = useState(false);
 
@@ -21,6 +21,20 @@ export default ({ name, pictures, price, likes, _id }) => {
                         prev.filter(el => el._id !== _id) :
                         [...prev, data]
                 })
+                setGoods(prev => prev.map(el => {
+                    if (el._id === data._id) {
+                        return data;
+                    } else {
+                        return el;
+                    }
+                }));
+                setVisibleGoods(prev => prev.map(el => {
+                    if (el._id === data._id) {
+                        return data;
+                    } else {
+                        return el;
+                    }
+                }));
             })
     }
 
@@ -42,17 +56,17 @@ export default ({ name, pictures, price, likes, _id }) => {
         })
     }
 
-    useEffect(() => {
-        if (flag) {
-            api.getProducts()
-                .then(res => res.json())
-                .then(data => {
-                    if (!data.error) {
-                        setGoods(data.products);
-                    }
-                })
-        }
-    }, [like])
+    // useEffect(() => {
+    //     if (flag) {
+    //         api.getProducts()
+    //             .then(res => res.json())
+    //             .then(data => {
+    //                 if (!data.error) {
+    //                     setGoods(data.products);
+    //                 }
+    //             })
+    //     }
+    // }, [like])
 
     return <div className="card">
         <img src={pictures} alt={name} style={{ height: "100px" }} />

@@ -1,14 +1,14 @@
 import React from "react";
 import { Star, StarFill } from "react-bootstrap-icons"
 
-export default ({author, rating, created_at, text}) => {
+export default ({ author, rating, created_at, text }) => {
     const setRating = (n) => {
         let stars = [];
         for (let i = 0; i < n; i++) {
-            stars.push(<StarFill key={i}/>);
+            stars.push(<StarFill key={i} />);
         }
         for (let i = stars.length; i < 5; i++) {
-            stars.push(<Star key={i}/>);
+            stars.push(<Star key={i} />);
         }
         return stars;
     }

@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {Routes, Route, Link} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 
@@ -13,10 +13,9 @@ import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import dataLocal from "./assets/data.json";
 import AddForm from "./pages/AddForm";
-import Fake from "./pages/Fake";
 import Basket from "./pages/Basket";
 
-import {Api} from "./Api";
+import { Api } from "./Api";
 import Ctx from "./Ctx";
 import Favorites from "./pages/Favorites";
 
@@ -45,7 +44,6 @@ const App = () => {
 
     useEffect(() => {
         if (token) {
-            // загрузить данные с сервера
             api.getProducts()
                 .then(res => res.json())
                 .then(data => {
@@ -53,7 +51,7 @@ const App = () => {
                     setGoods(data.products);
                 })
         }
-    }, []) // функция отработает один раз при создании компонента
+    }, [])
 
     useEffect(() => {
         setApi(new Api(token));
@@ -73,7 +71,6 @@ const App = () => {
 
     useEffect(() => {
         if (token) {
-            // загрузить данные с сервера
             api.getProducts()
                 .then(res => res.json())
                 .then(data => {
@@ -93,7 +90,7 @@ const App = () => {
     useEffect(() => {
         localStorage.setItem("basket8", JSON.stringify(basket));
     }, [basket])
-    
+
     return (
         <Ctx.Provider value={{
             user: user,
@@ -115,25 +112,21 @@ const App = () => {
             setBasket
         }}>
             <div className="wrapper">
-                <Header/>
+                <Header />
                 <main className="py-4">
                     <Routes>
-                        <Route path={PATH} element={<Home/>}/>
-                        <Route path={PATH +"catalog"} element={<Catalog/>}/>
-                        <Route path={PATH +"profile"} element={<Profile/>}/>
-                        <Route path={PATH +"catalog/:id"} element={<Product/>}/>
-                        <Route path={PATH +"add"} element={<AddForm/>}/>
-                        <Route path={PATH +"favorites"} element={<Favorites/>}/>
-                        <Route path={PATH +"basket"} element={<Basket/>}/>
-                        <Route path={PATH +"fake/:n/:title"} element={<Fake/>} />
+                        <Route path={PATH} element={<Home />} />
+                        <Route path={PATH + "catalog"} element={<Catalog />} />
+                        <Route path={PATH + "profile"} element={<Profile />} />
+                        <Route path={PATH + "catalog/:id"} element={<Product />} />
+                        <Route path={PATH + "add"} element={<AddForm />} />
+                        <Route path={PATH + "favorites"} element={<Favorites />} />
+                        <Route path={PATH + "basket"} element={<Basket />} />
                     </Routes>
-                    {/* <ul>
-                        {smiles.map((el, i) => <li key={el}><Link to={`${PATH}fake/${i+1}/${el}`}>{el}</Link></li>)}
-                    </ul> */}
                 </main>
-                <Footer/>
+                <Footer />
             </div>
-            <Modal/>
+            <Modal />
         </Ctx.Provider>
     )
 }

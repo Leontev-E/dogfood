@@ -5,6 +5,7 @@
     align-items: center;
     position: relative;
 }
+
 .search-block>input {
     flex: 1;
     height: 30px;
@@ -15,24 +16,27 @@
     font-size: 16px;
     outline: none;
 }
+
 .search-block>input:focus {
     border-color: rgb(243, 231, 5);
 }
+
 .search-block>button {
     position: absolute;
     right: 0;
     background-color: transparent;
     border: none;
-    /* width: 24px; */
     height: 20px;
     display: flex;
     justify-content: flex-end;
 }
+
 .search-block svg {
     height: 100%;
     fill: silver;
     cursor: pointer;
 }
+
 .search-block svg:hover {
     fill: rgb(243, 231, 5);
 }

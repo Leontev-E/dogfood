@@ -1,6 +1,6 @@
-import React, {useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router";
-import {Row, Col, Form, Button} from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import Ctx from "../Ctx";
 
 export default () => {
@@ -12,7 +12,7 @@ export default () => {
     const [description, setDescription] = useState("");
     const [pictures, setPictures] = useState("");
 
-    const {api, PATH, setGoods} = useContext(Ctx);
+    const { api, PATH, setGoods } = useContext(Ctx);
     const navigate = useNavigate();
 
     const handler = (e) => {
@@ -62,7 +62,7 @@ export default () => {
                     <Form.Group className="mb-3">
                         <Form.Label>Вес</Form.Label>
                         <Form.Control type="text" value={wight} onChange={e => setWight(e.target.value)}
-                        placeholder="100 г."></Form.Control>
+                            placeholder="100 г."></Form.Control>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Скидка</Form.Label>
@@ -78,16 +78,16 @@ export default () => {
                     <Form.Group className="mb-3">
                         <Form.Label>Количество</Form.Label>
                         <Form.Control type="number" value={stock} onChange={e => setStock(e.target.value)}
-                        min={0}></Form.Control>
+                            min={0}></Form.Control>
                     </Form.Group>
                 </Col>
 
                 <Col xs={12} md={6}>
                     <div className="form-preview mb-2" style={{
-                        backgroundImage: pictures ? 
-                            `url(${pictures})` : 
+                        backgroundImage: pictures ?
+                            `url(${pictures})` :
                             "url(https://www.chanchao.com.tw/images/default.jpg)"
-                    }}/>
+                    }} />
 
                     <Form.Group className="mb-3">
                         <Form.Label>Изображение</Form.Label>

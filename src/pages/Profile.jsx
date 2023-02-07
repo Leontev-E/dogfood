@@ -1,11 +1,12 @@
-import React, {useContext, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {PencilSquare, XSquare, CheckSquare} from "react-bootstrap-icons";
-import {Row, Col, Form, Image} from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { PencilSquare, XSquare, CheckSquare } from "react-bootstrap-icons";
+import { Row, Col, Form, Image } from "react-bootstrap";
+import Favorites from "./Favorites";
 import Ctx from "../Ctx";
 
 export default () => {
-    const {user, setUser, api, PATH} = useContext(Ctx);
+    const { user, setUser, api, PATH } = useContext(Ctx);
     const navigate = useNavigate();
     const [nameFlag, setNameFlag] = useState(false);
     const [name, setName] = useState(user.name);
@@ -34,9 +35,9 @@ export default () => {
                 setTextFlag(false);
             })
     }
-    
+
     const updImg = () => {
-        api.updUser({avatar: img}, true)
+        api.updUser({ avatar: img }, true)
             .then(res => res.json())
             .then(data => {
                 setUser(data);
@@ -45,63 +46,65 @@ export default () => {
             })
     }
 
-    return <Row>
+    return <> <Row>
         <Col xs={12} md={8}>
             <h1>Личный кабинет</h1>
             <p className="profile-row">
-                {!nameFlag 
+                {!nameFlag
                     ? <>
                         <span className="display-2">{name}</span>
-                        <PencilSquare onClick={() => setNameFlag(true)}/>
+                        <PencilSquare onClick={() => setNameFlag(true)} />
                     </>
                     : <>
-                        <Form.Control type="text" value={name} required onChange={e => setName(e.target.value)}/>
-                        <CheckSquare onClick={updUser}/>
+                        <Form.Control type="text" value={name} required onChange={e => setName(e.target.value)} />
+                        <CheckSquare onClick={updUser} />
                         <XSquare onClick={() => {
                             setName(user.name);
                             setNameFlag(false);
-                        }}/>
+                        }} />
                     </>
                 }
             </p>
             <p className="profile-row">
-                {!textFlag 
+                {!textFlag
                     ? <>
                         <span>{text}</span>
-                        <PencilSquare onClick={() => setTextFlag(true)}/>
+                        <PencilSquare onClick={() => setTextFlag(true)} />
                     </>
                     : <>
-                        <Form.Control type="text" value={text} required onChange={e => setText(e.target.value)}/>
-                        <CheckSquare  onClick={updUser}/>
+                        <Form.Control type="text" value={text} required onChange={e => setText(e.target.value)} />
+                        <CheckSquare onClick={updUser} />
                         <XSquare onClick={() => {
                             setText(user.about);
                             setTextFlag(false);
-                        }}/>
+                        }} />
                     </>
                 }
             </p>
             <p className="profile-row"><a href={`mailto:${user.email}`}>{user.email}</a></p>
             {user.group && <p className="profile-row">{user.group}</p>}
-            <p><a href="" onClick={logOut} style={{color: "orange"}}>Выйти из аккаунта</a></p>
+            <p><a href="" onClick={logOut} style={{ color: "orange" }}>Выйти из аккаунта</a></p>
         </Col>
         <Col xs={12} md={4}>
             <p className="profile-row">
-                {!imgFlag 
+                {!imgFlag
                     ? <>
-                        
-                        <PencilSquare onClick={() => setImgFlag(true)}/>
+
+                        <PencilSquare onClick={() => setImgFlag(true)} />
                     </>
                     : <>
-                        <Form.Control type="text" value={img} required onChange={e => setImg(e.target.value)}/>
-                        <CheckSquare  onClick={updImg}/>
+                        <Form.Control type="text" value={img} required onChange={e => setImg(e.target.value)} />
+                        <CheckSquare onClick={updImg} />
                         <XSquare onClick={() => {
                             setImg(user.avatar);
                             setImgFlag(false);
-                        }}/>
+                        }} />
                     </>
                 }
             </p>
-            <Image src={img} alt={name} className="w-100"/>
+            <Image src={img} alt={name} className="w-100" />
         </Col>
+        <Favorites />
     </Row>
+    </>
 }

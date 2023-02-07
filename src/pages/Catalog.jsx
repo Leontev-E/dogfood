@@ -5,7 +5,7 @@ import { EmojiFrown, SortNumericDown, SortNumericUp } from "react-bootstrap-icon
 import Ctx from "../Ctx";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
-import "./style.css";
+import "./Home.css";
 
 export default () => {
     const { visibleGoods, user, PATH } = useContext(Ctx);

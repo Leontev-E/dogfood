@@ -21,5 +21,12 @@ export default (data, cnt) => {
         return data.slice(start, end);
     }
 
-    return {currentPage, maxPage, next, previous, step, setPageData};
+    return {
+        currentPage,
+        maxPage,
+        next,
+        previous,
+        step,
+        setPageData
+    };
 }

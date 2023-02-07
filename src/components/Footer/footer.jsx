@@ -1,6 +1,6 @@
 import React from "react";
 import "./footer.css";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import logo from "../Logo/logo.svg";
 
 export default () => {
@@ -37,23 +37,23 @@ export default () => {
                     <a className="phone" href="#">8 (999) 00-00-00</a>
                     <a className="email" href="#">info@mail.ru</a>
                 </div>
-            <div className="social-media">
-                <a href="">
-                    <i className="fa-brands fa-telegram"></i>
-                </a>
-                <a href="">
-                    <i className="fa-brands fa-whatsapp"></i>
-                </a>
-                <a href="">
-                <i className="fa-brands fa-viber"></i>
-                </a>
-                <a href="">
-                <i className="fa-brands fa-instagram"></i>
-                </a>
-                <a href="">
-                <i className="fa-brands fa-vk"></i>
-                </a>
-            </div>
+                <div className="social-media">
+                    <a href="">
+                        <i className="fa-brands fa-telegram"></i>
+                    </a>
+                    <a href="">
+                        <i className="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="">
+                        <i className="fa-brands fa-viber"></i>
+                    </a>
+                    <a href="">
+                        <i className="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="">
+                        <i className="fa-brands fa-vk"></i>
+                    </a>
+                </div>
             </div>
         </footer>
     )

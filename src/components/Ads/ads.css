@@ -15,6 +15,7 @@
     justify-content: space-between;
     margin-top: -3em;
 }
+
 .promo:before {
     content: "";
     position: absolute;
@@ -25,10 +26,13 @@
     background-color: #dededeaa;
     z-index: -1;
 }
+
 .promo img {
     width: 200px;
 }
+
 h2 {
     font-size: 30px;
-    color: rgb(34, 34, 32);;
+    color: rgb(34, 34, 32);
+    ;
 }

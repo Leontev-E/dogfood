@@ -1,12 +1,12 @@
-import React, {useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import Ctx from "../../Ctx";
 
-export default ({change, close}) => {
+export default ({ change, close }) => {
     const [inp1, setInp1] = useState("");
     const [inp2, setInp2] = useState("");
     const [inp3, setInp3] = useState("");
     const [testPwd, setTestPwd] = useState(true);
-    const {api, setToken, setUser} = useContext(Ctx)
+    const { api, setToken, setUser } = useContext(Ctx)
 
     const checkPwd = (val, type = "main") => {
         type === "main" ? setInp2(val) : setInp3(val);
@@ -43,33 +43,32 @@ export default ({change, close}) => {
                     close(false);
                 } else {
                     alert(data.message);
-                    // Отобразить уведомление с ошибкой
                 }
             })
     }
 
     return <form onSubmit={sendForm}>
-        <input 
-            type="email" 
-            placeholder="Введите вашу почту" 
-            value={inp1} 
+        <input
+            type="email"
+            placeholder="Введите вашу почту"
+            value={inp1}
             required
-            onChange={(e) => {setInp1(e.target.value)}}
+            onChange={(e) => { setInp1(e.target.value) }}
         />
-        <input 
-            type="password" 
-            placeholder="Пароль" 
-            value={inp2} 
-            onChange={(e) => {checkPwd(e.target.value)}}
+        <input
+            type="password"
+            placeholder="Пароль"
+            value={inp2}
+            onChange={(e) => { checkPwd(e.target.value) }}
         />
-        <input 
-            type="password" 
-            placeholder="Повторить пароль" 
-            value={inp3} 
-            onChange={(e) => {checkPwd(e.target.value, "check")}}
+        <input
+            type="password"
+            placeholder="Повторить пароль"
+            value={inp3}
+            onChange={(e) => { checkPwd(e.target.value, "check") }}
         />
         <button className="btn" type="submit" disabled={testPwd}>Зарегистрироваться</button>
-        <button className="btn link" type="button" onClick={() => {change(prev => !prev)}}>Войти</button>
+        <button className="btn link" type="button" onClick={() => { change(prev => !prev) }}>Войти</button>
     </form>
 }
 

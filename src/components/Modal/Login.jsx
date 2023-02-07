@@ -1,11 +1,11 @@
-import React, {useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import Ctx from "../../Ctx";
 
-export default ({change, close}) => {
+export default ({ change, close }) => {
     const [inp1, setInp1] = useState("");
     const [inp2, setInp2] = useState("");
 
-    const {setToken, api} = useContext(Ctx);
+    const { setToken, api } = useContext(Ctx);
 
     const sendForm = (e) => {
         e.preventDefault();
@@ -14,7 +14,7 @@ export default ({change, close}) => {
             password: inp2
         }
         api.signIn(body)
-            .then(res => res.json())
+            .then(res => res.ok ? res.json() : Promise.reject(res))
             .then(data => {
                 localStorage.setItem("user8", JSON.stringify(data.data));
                 localStorage.setItem("token8", data.token);
@@ -23,23 +23,28 @@ export default ({change, close}) => {
                 setInp2("");
                 close(false)
             })
+            .catch(() => {
+                setInp1("");
+                setInp2("");
+                alert("Неверные логин или пароль");
+            })
     }
 
     return <form onSubmit={sendForm}>
-        <input 
-            type="email" 
-            placeholder="Введите вашу почту" 
-            value={inp1} 
+        <input
+            type="email"
+            placeholder="Введите вашу почту"
+            value={inp1}
             required
-            onChange={(e) => {setInp1(e.target.value)}}
+            onChange={(e) => { setInp1(e.target.value) }}
         />
-        <input 
-            type="password" 
-            placeholder="Пароль" 
-            value={inp2} 
-            onChange={(e) => {setInp2(e.target.value)}}
+        <input
+            type="password"
+            placeholder="Пароль"
+            value={inp2}
+            onChange={(e) => { setInp2(e.target.value) }}
         />
         <button className="btn" type="submit">Войти</button>
-        <button className="btn link" type="button" onClick={() => {change(prev => !prev)}}>Зарегистрироваться</button>
+        <button className="btn link" type="button" onClick={() => { change(prev => !prev) }}>Зарегистрироваться</button>
     </form>
 }

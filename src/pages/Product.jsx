@@ -1,22 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
-import {useParams, Link, useNavigate, Route} from "react-router-dom";
-import {Trash3} from "react-bootstrap-icons"
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { Trash3 } from "react-bootstrap-icons"
 import Review from "../components/Review/review";
 import Ctx from "../Ctx";
-import {Container, Row, Col, Figure, Table, ButtonGroup, Button, Form} from "react-bootstrap";
+import { Container, Row, Col, Figure, Table, Form } from "react-bootstrap";
 import data from "../assets/data.json";
+import Modal from "react-modal";
 
-
-export default ({}) => {
-    const {id} = useParams();
+export default ({ }) => {
+    const { id } = useParams();
     let p = data[0];
     const [product, setProduct] = useState({});
-    const [cnt, setCnt] = useState(0);
-    const {api, PATH, user, setGoods} = useContext(Ctx);
+    const [showModal, setShowModal] = useState(false);
+    const { api, PATH, user, setGoods, setBasket } = useContext(Ctx);
     const navigate = useNavigate();
     const [rating, setRating] = useState(0);
     const [text, setText] = useState("");
-    const [active, setActive] = useState(false);
     useEffect(() => {
         api.getProduct(id)
             .then(res => res.json())
@@ -25,9 +24,9 @@ export default ({}) => {
             })
     });
     const btnSt = {
-        position: "absolute",
+        // position: "absolute",
         right: "20px",
-        top: "250px",
+        top: "20px",
         cursor: "pointer",
         height: "auto"
     }
@@ -41,15 +40,8 @@ export default ({}) => {
                 }
             })
     }
-    // const Breadcrumbs = () => {
-    //     const breadcrumbs = useBreadcrumbs();
-      
-    //     return (
-    //       <React.Fragment>
-    //         {breadcrumbs.map(({ breadcrumb }) => breadcrumb)}
-    //       </React.Fragment>
-    //     );
-    //   };
+
+
 
     const submit = (e) => {
         e.preventDefault();
@@ -61,54 +53,54 @@ export default ({}) => {
         api.setReview(id, body)
             .then(res => res.json())
             .then(data => {
-                if(!data.error) {
+                if (!data.error) {
                     setGoods(prev => [...prev, data]);
                     clear();
                     navigate(`${PATH}catalog/${data._id}`);
                 }
             })
-        };
+    };
 
     const clear = (e) => {
         setRating(0);
         setText("");
     };
 
+    const customStyles = {
+        content: {
+            top: '35%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            width: 'max-content',
+            transform: 'translate(-40%, -10%)',
+        },
+    };
+
     return <>
-    <p className="breadcrumbs">
-    <Link to={PATH+"./"}>Главная</Link>&nbsp;-&nbsp;
-    <Link to={PATH+"catalog"}>Каталог</Link>&nbsp;-&nbsp;
-    {product.name || "Страница товара"}
-    </p>
-        {product && product.author && product.author._id === user._id && <button 
-            onClick={remove} 
-            className="btn" 
-            style={btnSt}
-        >
-            <Trash3/>
-        </button>}
-    <Container>
-        {product._id &&
-            <Row>
-                {/* <Col xs={12}>
-                    <h1>{product.name || "Страница товара"}</h1>
-                </Col> */}
-                <Col xs={8}>
-                    <Figure>
-                        <Figure.Image className="img-fluid" src={product.pictures}/>
-                    </Figure>
-                </Col>
-                <Col xs={12} md={4}>
-                    {/* {product.discount && <small><del>{product.price} ₽</del></small>}
-                    <div><strong className={product.discount ? "text-danger" : "text-dark"}>{Math.ceil(product.price * ((100 - product.discount) / 100))} ₽</strong></div> */}
-                    <Row>
-                        <Col md={6}>
-                        {/* <ButtonGroup>
-                            <Button size="sm" variant="light" disabled={!cnt} onClick={e => setCnt(cnt - 1)}>-</Button>
-                            <Button size="sm" variant="light" disabled>{cnt}</Button>
-                            <Button size="sm" variant="light" onClick={e => setCnt(cnt + 1)}>+</Button>
-                        </ButtonGroup> */}
-                        </Col>
+        <p className="breadcrumbs">
+            <Link to={PATH + "./"}>Главная</Link>&nbsp;-&nbsp;
+            <Link to={PATH + "catalog"}>Каталог</Link>&nbsp;-&nbsp;
+            {product.name || "Страница товара"}
+        </p>
+        <Modal isOpen={showModal} ariaHideApp={false} onRequestClose={() => setShowModal(false)} style={customStyles}>
+            <div className="popup">
+                <div><h5 className="">Вы точно хотите удалить:</h5></div>
+                <div><p>{product.name} ?</p></div>
+                <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Закрыть</button>
+                <button className="btn btn-danger" onClick={remove}>Удалить</button>
+            </div>
+        </Modal>
+        <Container>
+            {product._id &&
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Figure>
+                            <Figure.Image className="img-fluid img-thumbnail" src={product.pictures} />
+                        </Figure>
+                    </Col>
+                    <Col Col xs={12} md={6}>
                         <Col xs={12}>
                             <h1 className="head">{product.name || "Страница товара"}</h1>
                         </Col>
@@ -116,57 +108,57 @@ export default ({}) => {
                             <h4 className="head-description">Описание товара:</h4>
                             <p className="description-product">{product.description}</p>
                         </Col>
-                        <Col md={6}>
-                        <Button type="button" className="buy" size="sm" variant="warning">В корзину</Button>
-                        </Col>
-                    </Row>
-                </Col>
-                {/* <Col xs={12}>
-                    <h2>Описание</h2>
-                    <p>{product.description}</p>
-                </Col> */}
-                <Col xs={12}>
-                    <h2>Характеристики</h2>
-                    <Table hover>
-                        <tbody>
-                            <tr>
-                                <th>Вес</th>
-                                <td>{product.wight} г.</td>
-                            </tr>
-                            <tr>
-                                <th>Цена</th>
-                                <td>{product.price} ₽ за {product.wight} г.</td>
-                            </tr>
-                            <tr>
-                                <th>Остаток на складе</th>
-                                <td>{product.stock} шт.</td>
-                            </tr>
-                            <tr>
-                                <th>Польза</th>
-                                <td>{product.description}</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                </Col>
-                <Col xs={12}>
-                    <h2>Отзывы</h2>
+                        {product && product.author && product.author._id === user._id && <button
+                            onClick={() =>
+                                setShowModal(true)
+                            }
+                            className="btn"
+                            style={btnSt}>
+                            <Trash3 />
+                        </button>}
+                    </Col>
+                    <Col xs={12}>
+                        <h2>Характеристики</h2>
+                        <Table hover>
+                            <tbody>
+                                <tr>
+                                    <th>Вес</th>
+                                    <td>{product.wight} г.</td>
+                                </tr>
+                                <tr>
+                                    <th>Цена</th>
+                                    <td>{product.price} ₽ за {product.wight} г.</td>
+                                </tr>
+                                <tr>
+                                    <th>Остаток на складе</th>
+                                    <td>{product.stock} шт.</td>
+                                </tr>
+                                <tr>
+                                    <th>Польза</th>
+                                    <td>{product.description}</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </Col>
+                    <Col xs={12}>
+                        <h2>Отзывы</h2>
 
                         <Form onSubmit={submit}>
                             <Row>
                                 <Col xs={12} md={6}>
                                     <Form.Group className="mb-3">
                                         <Form.Label>Оценка товара</Form.Label>
-                                            <Form.Select value={rating} onChange={e => setRating(e.target.value)}>
-                                                <option value={1}>★</option>
-                                                <option value={2}>★★</option>
-                                                <option value={3}>★★★</option>
-                                                <option value={4}>★★★★</option>
-                                                <option value={5}>★★★★★</option>
-                                            </Form.Select>
+                                        <Form.Select value={rating} onChange={e => setRating(e.target.value)}>
+                                            <option value={1}>★</option>
+                                            <option value={2}>★★</option>
+                                            <option value={3}>★★★</option>
+                                            <option value={4}>★★★★</option>
+                                            <option value={5}>★★★★★</option>
+                                        </Form.Select>
                                     </Form.Group>
                                     <Form.Group className="mb-3">
                                         <Form.Label>Ваш отзыв</Form.Label>
-                                        <Form.Control 
+                                        <Form.Control
                                             as="textarea"
                                             rows={4}
                                             value={text}
@@ -178,12 +170,12 @@ export default ({}) => {
                                 </Col>
                             </Row>
                         </Form>
-                    <div className="reviews">
-                      {product.reviews && product.reviews.length > 0 && product.reviews.map((el, i) => <Review {...el} key={i}/>)}
-                    </div>
-                </Col>
-            </Row>
-        }
-    </Container>
+                        <div className="reviews">
+                            {product.reviews && product.reviews.length > 0 && product.reviews.map((el, i) => <Review {...el} key={i} />)}
+                        </div>
+                    </Col>
+                </Row>
+            }
+        </Container>
     </>
 }

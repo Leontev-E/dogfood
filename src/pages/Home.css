@@ -13,7 +13,6 @@
 .two {
     margin-top: 20px;
     grid-template-columns: repeat(3, 1fr);
-    max-width: 300px;
 }
 
 .description {
@@ -42,9 +41,11 @@
 .three-block {
     background-color: #9CCE55;
 }
+
 .two-block {
     background-color: #25B5BE;
 }
+
 .one-block {
     background-color: #D7A216;
 }
@@ -93,7 +94,7 @@
     background-color: #F2F1FC;
 }
 
-.card > button {
+.card>button {
     font-size: 1.2em;
 }
 

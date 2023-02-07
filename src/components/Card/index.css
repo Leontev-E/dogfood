@@ -12,6 +12,7 @@
     height: 100%;
     text-align: center;
 }
+
 .card__heart {
     position: absolute;
     top: .5em;

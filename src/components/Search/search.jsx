@@ -19,11 +19,12 @@ export default () => {
         navigate(PATH + "catalog");
         updateText(e.target.value);
         let arr = goods.filter(el => el.name.toLowerCase().includes(e.target.value.toLowerCase()))
+        console.log(arr);
         setSearchData(arr);
         setVisibleGoods(arr);
     }
     return <div className="search-block">
-        <input placeholder="Поиск..." value={text} onChange={search} maxlength="28" />
+        <input placeholder="Поиск..." value={text} onChange={search} maxLength={28} />
         <button>{text ? <CloseImg onClick={clearSearch} /> : <SearchImg />}</button>
         {text && <div className="search-result">
             По запросу <b>{text}</b>&nbsp;

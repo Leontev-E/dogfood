@@ -24,7 +24,6 @@ export default ({ }) => {
             })
     });
     const btnSt = {
-        // position: "absolute",
         right: "20px",
         top: "20px",
         cursor: "pointer",
@@ -40,8 +39,6 @@ export default ({ }) => {
                 }
             })
     }
-
-
 
     const submit = (e) => {
         e.preventDefault();
@@ -100,7 +97,7 @@ export default ({ }) => {
                             <Figure.Image className="img-fluid img-thumbnail" src={product.pictures} />
                         </Figure>
                     </Col>
-                    <Col Col xs={12} md={6}>
+                    <Col xs={12} md={6}>
                         <Col xs={12}>
                             <h1 className="head">{product.name || "Страница товара"}</h1>
                         </Col>

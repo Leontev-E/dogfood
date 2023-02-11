@@ -28,13 +28,3 @@
   border: 1px solid #ccc;
   border-top: none;
 }
-
-.popup {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-secondary {
-  margin: 20px;
-}

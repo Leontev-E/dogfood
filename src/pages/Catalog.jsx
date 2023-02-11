@@ -8,7 +8,7 @@ import usePagination from "../hooks/usePagination";
 import "./Home.css";
 
 export default () => {
-    const { visibleGoods, user, PATH } = useContext(Ctx);
+    const {visibleGoods, user, PATH} = useContext(Ctx);
     const [sortGoods, setSortGoods] = useState(visibleGoods);
     const paginate = usePagination(sortGoods, 12);
     const [btnType, setBtnType] = useState("");
@@ -50,12 +50,11 @@ export default () => {
         }
     }
     useEffect(() => {
-        if (sortGoods.length === 0) {
             setSortGoods(visibleGoods);
-        }
     }, [visibleGoods]);
 
     return <>
+    {user && <>
         {visibleGoods.length > 0
             ? <>
                 <h1>Каталог товаров</h1>
@@ -77,6 +76,14 @@ export default () => {
                 <EmojiFrown />
                 <p>Простите, по вашему запросу товаров не найдено</p>
                 <Link to="/" className="btn">На главную</Link>
+            </div>
+        }
+    </>}
+        {!user && 
+            <div className="empty-block">
+                <EmojiFrown/>
+                <p>Простите, у вас нет доступа к товарам без авторизации</p>
+                <Link to={PATH} className="btn">На главную</Link>
             </div>
         }
     </>

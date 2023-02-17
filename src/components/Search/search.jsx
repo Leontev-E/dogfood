@@ -18,7 +18,7 @@ export default () => {
     const search = (e) => {
         navigate(PATH + "catalog");
         updateText(e.target.value);
-        let arr = goods.filter(el => el.name.toLowerCase().includes(e.target.value.toLowerCase()))
+        let arr = goods.filter(el => el.name.toString().toLowerCase().includes(e.target.value.toString().toLowerCase()))
         console.log(arr);
         setSearchData(arr);
         setVisibleGoods(arr);

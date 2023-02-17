@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, {useContext, useState} from "react";
 import { useNavigate } from "react-router";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import {Row, Col, Form, Button} from "react-bootstrap";
 import Ctx from "../Ctx";
 
 export default () => {
@@ -12,15 +12,14 @@ export default () => {
     const [description, setDescription] = useState("");
     const [pictures, setPictures] = useState("");
 
-    const { api, PATH, setGoods } = useContext(Ctx);
+    const {api, PATH, setGoods} = useContext(Ctx);
     const navigate = useNavigate();
-
     const handler = (e) => {
         e.preventDefault();
         let body = {
             name: name || "Название отсутствует",
             price: price || 0,
-            wight: wight || "unknow",
+            wight: wight || "unknown",
             stock: stock || 0,
             description: description || "Тут скоро появится описание товара",
             discount: discount,
@@ -52,52 +51,81 @@ export default () => {
                 <Col xs={12} md={6}>
                     <Form.Group className="mb-3">
                         <Form.Label>Название товара</Form.Label>
-                        <Form.Control type="text" value={name} onChange={e => setName(e.target.value)}></Form.Control>
+                        <Form.Control 
+                            type="text" 
+                            value={name} 
+                            onChange={e => setName(e.target.value)}
+                        />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Цена</Form.Label>
-                        <Form.Control type="number" value={price} onChange={e => setPrice(e.target.value)}
-                            min={0}></Form.Control>
+                        <Form.Control 
+                            type="number" 
+                            value={price} 
+                            onChange={e => setPrice(e.target.value)}
+                            step="10"
+                            min={0}
+                        />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Вес</Form.Label>
-                        <Form.Control type="text" value={wight} onChange={e => setWight(e.target.value)}
-                            placeholder="100 г."></Form.Control>
+                        <Form.Control 
+                            type="text" 
+                            value={wight}
+                            placeholder="100 г"
+                            onChange={e => setWight(e.target.value)}
+                        />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Скидка</Form.Label>
-                        <Form.Select value={discount} onChange={e => setDiscount(e.target.value)}>
+                        <Form.Select
+                            value={discount} 
+                            onChange={e => setDiscount(e.target.value)}
+                        >
                             <option value={0}>Без скидки</option>
                             <option value={5}>5%</option>
                             <option value={10}>10%</option>
                             <option value={15}>15%</option>
                             <option value={20}>20%</option>
                             <option value={25}>25%</option>
-                        </Form.Select>
+                        </Form.Select> 
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Количество</Form.Label>
-                        <Form.Control type="number" value={stock} onChange={e => setStock(e.target.value)}
-                            min={0}></Form.Control>
+                        <Form.Control 
+                            type="number" 
+                            value={stock} 
+                            onChange={e => setStock(e.target.value)}
+                            min={0}
+                        />
                     </Form.Group>
                 </Col>
-
                 <Col xs={12} md={6}>
                     <div className="form-preview mb-2" style={{
-                        backgroundImage: pictures ?
-                            `url(${pictures})` :
+                        backgroundImage: pictures ? 
+                            `url(${pictures})` : 
                             "url(https://www.chanchao.com.tw/images/default.jpg)"
-                    }} />
-
+                    }}/>
                     <Form.Group className="mb-3">
                         <Form.Label>Изображение</Form.Label>
-                        <Form.Control type="url" value={pictures} onChange={e => setPictures(e.target.value)}></Form.Control>
+                        <Form.Control
+                            type="url"
+                            value={pictures}
+                            onChange={e => setPictures(e.target.value)}
+                        />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Описание</Form.Label>
-                        <Form.Control as="textarea" value={description} onChange={e => setDescription(e.target.value)} rows={4}></Form.Control>
+                        <Form.Control 
+                            as="textarea" 
+                            rows={4}
+                            value={description}
+                            onChange={e => setDescription(e.target.value)}
+                        />
                     </Form.Group>
-                    <Button variant={"warning"} type="submit">Добавить</Button>
+                    <Button variant={"warning"} type="submit">
+                        Добавить
+                    </Button>
                 </Col>
             </Row>
         </Form>

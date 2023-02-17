@@ -38,6 +38,7 @@ const App = () => {
     const [modalActive, setModalActive] = useState(false);
     const [api, setApi] = useState(new Api(token));
     const [goods, setGoods] = useState([]);
+    const [authors, setAuthors] = useState([]);
     const [visibleGoods, setVisibleGoods] = useState(goods);
     const [favorites, setFavorites] = useState([]);
     const [basket, setBasket] = useState(localStorage.getItem("basket8") ? JSON.parse(localStorage.getItem("basket8")) : []);
@@ -49,6 +50,11 @@ const App = () => {
                 .then(data => {
                     setVisibleGoods(data.products);
                     setGoods(data.products);
+                })
+            api.getUsers()
+                .then(res => res.json())
+                .then(data => {
+                    setAuthors(data);
                 })
         }
     }, [])
@@ -109,7 +115,8 @@ const App = () => {
             visibleGoods: visibleGoods,
             PATH: PATH,
             basket,
-            setBasket
+            setBasket,
+            authors
         }}>
             <div className="wrapper">
                 <Header />

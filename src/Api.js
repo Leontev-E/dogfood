@@ -4,7 +4,7 @@ class Api {
         this.group = "group-8";
         this.token = token;
     }
-    signUp(body) { // регистрация
+    signUp(body) {
         body.group = this.group;
         return fetch(`${this.path}/signup`, {
             method: "POST",
@@ -14,7 +14,7 @@ class Api {
             body: JSON.stringify(body)
         });
     }
-    signIn(body) { // авторизация
+    signIn(body) {
         return fetch(`${this.path}/signin`, {
             method: "POST",
             headers: {
@@ -82,6 +82,13 @@ class Api {
         },
         body: JSON.stringify(body)
     })
+    }
+    getUsers() {
+        return fetch(`${this.path}/v2/${this.group}/users`, {
+            headers: {
+                "authorization": `Bearer ${this.token}`
+            }
+        })
     }
 }
 

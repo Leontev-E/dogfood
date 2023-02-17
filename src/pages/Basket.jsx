@@ -15,7 +15,8 @@ export default () => {
             })
         }
         setGds(arr);
-    }, [basket, goods])
+    }, [basket, goods]);
+
     return <>
         <h1>Корзина</h1>
         {basket.length > 0 && gds.length > 0 && <Table hover>
@@ -25,17 +26,19 @@ export default () => {
                     <th>Название</th>
                     <th>Количество</th>
                     <th>Цена</th>
+                    <th>Новая цена</th>
+                    <th>Скидка</th>
                 </tr>
             </thead>
             <tbody>
-                {basket.map((el, i) => <Row key={el.id} {...gds[i]} {...el} />)}
+                {basket.map((el, i) => <Row key={el.id} {...gds[i]} {...el}/>)}
             </tbody>
             <tfoot>
                 <tr>
-                    <td colSpan={3} className="text-end fw-bold fs-3">ИТОГО:</td>
+                    <td colSpan={5} className="text-end fw-bold fs-3">ИТОГО:</td>
                     <td className="fw-bold fs-3">
                         {basket.reduce((acc, el, i) => {
-                            acc += el.cnt * gds[i].price;
+                            acc += (el.cnt * Math.round(gds[i].price - (gds[i].price * gds[i].discount) / 100));
                             return acc;
                         }, 0)}₽
                     </td>

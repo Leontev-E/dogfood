@@ -14,7 +14,7 @@ export default ({ }) => {
     const [showModal, setShowModal] = useState(false);
     const { api, PATH, user, setGoods, setBasket } = useContext(Ctx);
     const navigate = useNavigate();
-    const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState(1);
     const [text, setText] = useState("");
     useEffect(() => {
         api.getProduct(id)
@@ -27,7 +27,8 @@ export default ({ }) => {
         right: "20px",
         top: "20px",
         cursor: "pointer",
-        height: "auto"
+        height: "auto",
+        marginLeft: "10px"
     }
     const remove = () => {
         api.delProduct(id)
@@ -44,7 +45,7 @@ export default ({ }) => {
         e.preventDefault();
         let body = {
             rating: rating,
-            text: text || " ",
+            text: text || "",
         };
 
         api.setReview(id, body)
@@ -59,7 +60,7 @@ export default ({ }) => {
     };
 
     const clear = (e) => {
-        setRating(0);
+        setRating(1);
         setText("");
     };
 
@@ -75,6 +76,26 @@ export default ({ }) => {
         },
     };
 
+    const buy = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setBasket(prev => {
+            const test = prev.filter(el => el.id === id);
+            if (test.length) {
+                return prev.map(el => {
+                    if (el.id === id) {
+                        el.cnt++;
+                    }
+                    return el;
+                })
+            } else {
+                return [...prev, { id: id, cnt: 1 }];
+            }
+        })
+    };
+
+    const disc = Math.round(product.price - (product.price * product.discount) / 100);
+
     return <>
         <p className="breadcrumbs">
             <Link to={PATH + "./"}>Главная</Link>&nbsp;-&nbsp;
@@ -89,7 +110,7 @@ export default ({ }) => {
                 <button className="btn btn-danger" onClick={remove}>Удалить</button>
             </div>
         </Modal>
-        <Container>
+        <div>
             {product._id &&
                 <Row>
                     <Col xs={12} md={6}>
@@ -99,36 +120,44 @@ export default ({ }) => {
                     </Col>
                     <Col xs={12} md={6}>
                         <Col xs={12}>
-                            <h1 className="head">{product.name || "Страница товара"}</h1>
+                            <h1 className="head">{product.name || "Страница товара"}
+                                {product && product.author && product.author._id === user._id && <button
+                                onClick={() => setShowModal(true)}
+                                className="btn"
+                                style={btnSt}>
+                                <Trash3 />
+                            </button>}
+                            </h1>
                         </Col>
                         <Col md={12}>
                             <h4 className="head-description">Описание товара:</h4>
                             <p className="description-product">{product.description}</p>
                         </Col>
-                        {product && product.author && product.author._id === user._id && <button
-                            onClick={() =>
-                                setShowModal(true)
-                            }
-                            className="btn"
-                            style={btnSt}>
-                            <Trash3 />
-                        </button>}
+                        <Table hover>
+                            <tbody>
+                                <tr>
+                                    <td>Цена</td>
+                                    <td>{disc} ₽</td>
+                                    <td><button className="btn" onClick={buy}>В корзину</button></td>
+                                </tr>
+                            </tbody>
+                        </Table>
                     </Col>
                     <Col xs={12}>
                         <h2>Характеристики</h2>
                         <Table hover>
                             <tbody>
-                                <tr>
-                                    <th>Вес</th>
-                                    <td>{product.wight} г.</td>
+                            <tr>
+                                    <th>Скидка</th>
+                                    <td>{product.discount}%</td>
                                 </tr>
                                 <tr>
-                                    <th>Цена</th>
-                                    <td>{product.price} ₽ за {product.wight} г.</td>
+                                    <th>Вес</th>
+                                    <td>{product.wight}</td>
                                 </tr>
                                 <tr>
                                     <th>Остаток на складе</th>
-                                    <td>{product.stock} шт.</td>
+                                    <td>{product.stock} шт</td>
                                 </tr>
                                 <tr>
                                     <th>Польза</th>
@@ -173,6 +202,6 @@ export default ({ }) => {
                     </Col>
                 </Row>
             }
-        </Container>
+        </div>
     </>
 }

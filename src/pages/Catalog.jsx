@@ -52,7 +52,7 @@ export default () => {
     useEffect(() => {
             setSortGoods(visibleGoods);
     }, [visibleGoods]);
-
+    console.log(visibleGoods);
     return <>
     {user && <>
         {visibleGoods.length > 0
